@@ -1,0 +1,40 @@
+# OS Files
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vim/
+.github
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Build & Dist
+dist/
+build/
+*.min.js
+*.min.css
+
+# Temporary
+*.tmp
+.tmp/
+temp/
+.cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+md
