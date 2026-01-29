@@ -509,11 +509,21 @@ footer {
     border: 1px solid transparent;
 }
 
-.sidebar-item svg {
+.sidebar-item svg, .sidebar-item .svg-icon {
     width: 24px;
     height: 24px;
-    fill: var(--color-text);
+    fill: var(--color-text); /* Fallback for inline SVG */
+    background-color: var(--color-text); /* For Masked Icon */
     transition: all 0.3s;
+}
+
+.svg-icon {
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
 }
 
 .sidebar-item:hover {
@@ -522,8 +532,9 @@ footer {
     border: 1px solid rgba(255,255,255,0.1);
 }
 
-.sidebar-item:hover svg {
+.sidebar-item:hover svg, .sidebar-item:hover .svg-icon {
     fill: var(--color-primary);
+    background-color: var(--color-primary);
     filter: drop-shadow(0 0 5px var(--color-primary));
 }
 
@@ -534,9 +545,19 @@ footer {
     background: rgba(254, 254, 44, 0.05);
 }
 
-.sidebar-item.active svg {
+.sidebar-item.active svg, .sidebar-item.active .svg-icon {
     fill: var(--color-primary);
+    background-color: var(--color-primary);
 }
+
+/* Icon Mappings */
+.icon-home { -webkit-mask-image: url('../assets/icon-home.svg'); mask-image: url('../assets/icon-home.svg'); }
+.icon-projects { -webkit-mask-image: url('../assets/icon-projects.svg'); mask-image: url('../assets/icon-projects.svg'); }
+.icon-search { -webkit-mask-image: url('../assets/icon-search.svg'); mask-image: url('../assets/icon-search.svg'); }
+.icon-about { -webkit-mask-image: url('../assets/icon-about.svg'); mask-image: url('../assets/icon-about.svg'); }
+.icon-contact { -webkit-mask-image: url('../assets/icon-contact.svg'); mask-image: url('../assets/icon-contact.svg'); }
+.icon-moon { -webkit-mask-image: url('../assets/icon-moon.svg'); mask-image: url('../assets/icon-moon.svg'); }
+.icon-sun { -webkit-mask-image: url('../assets/icon-sun.svg'); mask-image: url('../assets/icon-sun.svg'); }
 
 /* Mobile: Hide Sidebar */
 @media (max-width: 768px) {

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+    <!-- Dark Box Background -->
+    <rect x="0" y="0" width="128" height="128" rx="24" fill="#111111"/>
+    
+    <!-- Outer Hexagon Frame -->
+    <path d="M64 24 L98.6 44 V84 L64 104 L29.4 84 V44 Z" fill="none" stroke="#FEFE2C" stroke-width="6" stroke-linejoin="round"/>
+    
+    <!-- Inner Glitch/Tech Elements -->
+    <rect x="58" y="58" width="12" height="12" fill="#FEFE2C"/>
+    <rect x="58" y="44" width="12" height="4" fill="#FEFE2C" opacity="0.6"/>
+    <rect x="58" y="80" width="12" height="4" fill="#FEFE2C" opacity="0.6"/>
+    
+    <!-- Corner Decor -->
+    <path d="M100 28 L108 28 L108 36" fill="none" stroke="#FEFE2C" stroke-width="3"/>
+    <path d="M28 100 L20 100 L20 92" fill="none" stroke="#FEFE2C" stroke-width="3"/>
+</svg>
