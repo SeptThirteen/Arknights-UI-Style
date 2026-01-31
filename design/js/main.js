@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadMoreBtn = document.querySelector('.loader-btn');
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', () => {
-            const originalText = loadMoreBtn.innerText;
             loadMoreBtn.innerText = 'LOADING...';
             loadMoreBtn.style.opacity = '0.7';
             
@@ -52,12 +51,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1500);
         });
     }
-});
 
     // Sidebar Navigation Logic
     const sidebarItems = document.querySelectorAll('.js-sidebar-nav');
+    const activateByKeyboard = (event, action) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            action();
+        }
+    };
+
     sidebarItems.forEach(item => {
-        item.addEventListener('click', () => {
+        const handleActivate = () => {
              // Remove active class from all
              sidebarItems.forEach(i => i.classList.remove('active'));
              // Add active to current
@@ -77,10 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
                  if (section) {
                      section.scrollIntoView({ behavior: 'smooth' });
                  }
-             }
-        });
-    });
+               }
+           };
 
+           item.addEventListener('click', handleActivate);
+           item.addEventListener('keydown', (event) => activateByKeyboard(event, handleActivate));
+    });
 
     // Theme Toggle Logic
     const themeBtn = document.querySelector('.js-theme-toggle');
@@ -92,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const systemPref = window.matchMedia('(prefers-color-scheme: light)');
     
     // Function to set theme
-    const setTheme = (theme) => {
+    const setTheme = (theme, persist = true) => {
         root.setAttribute('data-theme', theme);
         if (theme === 'light') {
             iconMoon.style.display = 'none';
@@ -101,59 +108,69 @@ document.addEventListener('DOMContentLoaded', () => {
             iconMoon.style.display = 'block';
             iconSun.style.display = 'none';
         }
+        if (persist) {
+            localStorage.setItem('preferred-theme', theme);
+        }
     };
 
-    // Initialize based on system logic
-    if (systemPref.matches) {
-        setTheme('light');
+    // Initialize based on user or system preference
+    const savedTheme = localStorage.getItem('preferred-theme');
+    if (savedTheme) {
+        setTheme(savedTheme, false);
+    } else if (systemPref.matches) {
+        setTheme('light', false);
     } else {
-        setTheme('dark');
+        setTheme('dark', false);
     }
 
-    // Toggle Click Event with Circular Ripple
-    themeBtn.addEventListener('click', (event) => {
-        const currentTheme = root.getAttribute('data-theme');
-        const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+    if (themeBtn) {
+        // Toggle Click Event with Circular Ripple
+        const handleThemeToggle = (event) => {
+            const currentTheme = root.getAttribute('data-theme');
+            const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
 
-        // Feature detection for View Transitions API
-        if (!document.startViewTransition) {
-            setTheme(nextTheme);
-            return;
-        }
+            // Feature detection for View Transitions API
+            if (!document.startViewTransition) {
+                setTheme(nextTheme);
+                return;
+            }
 
-        const x = event.clientX;
-        const y = event.clientY;
+            const x = typeof event.clientX === 'number' ? event.clientX : innerWidth / 2;
+            const y = typeof event.clientY === 'number' ? event.clientY : innerHeight / 2;
 
-        // Calculate distance to furthest corner
-        const endRadius = Math.hypot(
-            Math.max(x, innerWidth - x),
-            Math.max(y, innerHeight - y)
-        );
-
-        const transition = document.startViewTransition(() => {
-            setTheme(nextTheme);
-        });
-
-        transition.ready.then(() => {
-            const clipPath = [
-                `circle(0px at ${x}px ${y}px)`,
-                `circle(${endRadius}px at ${x}px ${y}px)`,
-            ];
-            
-            // Animate the new view expanding
-            document.documentElement.animate(
-                {
-                    clipPath: clipPath,
-                },
-                {
-                    duration: 500,
-                    easing: 'ease-in',
-                    pseudoElement: '::view-transition-new(root)',
-                }
+            // Calculate distance to furthest corner
+            const endRadius = Math.hypot(
+                Math.max(x, innerWidth - x),
+                Math.max(y, innerHeight - y)
             );
-        });
-    });
 
+            const transition = document.startViewTransition(() => {
+                setTheme(nextTheme);
+            });
+
+            transition.ready.then(() => {
+                const clipPath = [
+                    `circle(0px at ${x}px ${y}px)`,
+                    `circle(${endRadius}px at ${x}px ${y}px)`,
+                ];
+                
+                // Animate the new view expanding
+                document.documentElement.animate(
+                    {
+                        clipPath: clipPath,
+                    },
+                    {
+                        duration: 500,
+                        easing: 'ease-in',
+                        pseudoElement: '::view-transition-new(root)',
+                    }
+                );
+            });
+        };
+
+        themeBtn.addEventListener('click', handleThemeToggle);
+        themeBtn.addEventListener('keydown', (event) => activateByKeyboard(event, () => handleThemeToggle(event)));
+    }
 
     // Intersection Observer for Entrance Animations
     const observerOptions = {
@@ -174,4 +191,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.reveal').forEach(el => {
         observer.observe(el);
     });
+});
 

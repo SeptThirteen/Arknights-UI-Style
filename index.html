@@ -9,45 +9,47 @@
 </head>
 <body>
 
+    <a class="skip-link mono" href="#main">跳到主要内容</a>
+
     <!-- Background Grid Lines -->
-    <div class="line-deco line-v" style="left: 10%;"></div>
-    <div class="line-deco line-v" style="left: 90%;"></div>
-    <div class="line-deco line-h" style="top: 15%;"></div>
-    <div class="line-deco line-h" style="bottom: 15%;"></div>
+    <div class="line-deco line-v line-v-left-10"></div>
+    <div class="line-deco line-v line-v-left-90"></div>
+    <div class="line-deco line-h line-h-top-15"></div>
+    <div class="line-deco line-h line-h-bottom-15"></div>
 
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <nav class="sidebar" aria-label="侧边导航">
         <!-- Home -->
-        <div class="sidebar-item js-sidebar-nav" data-target="top" title="首页 // HOME">
+        <div class="sidebar-item js-sidebar-nav" data-target="top" title="首页 // HOME" aria-label="首页" role="button" tabindex="0">
             <div class="svg-icon icon-home"></div>
         </div>
         <!-- Projects -->
-        <div class="sidebar-item js-sidebar-nav" data-target="projects" title="项目 // PROJECTS">
+        <div class="sidebar-item js-sidebar-nav" data-target="projects" title="项目 // PROJECTS" aria-label="项目" role="button" tabindex="0">
             <div class="svg-icon icon-projects"></div>
         </div>
          <!-- Search -->
-        <div class="sidebar-item js-sidebar-nav" data-target="search" title="检索 // SEARCH">
+        <div class="sidebar-item js-sidebar-nav" data-target="search" title="检索 // SEARCH" aria-label="检索" role="button" tabindex="0">
             <div class="svg-icon icon-search"></div>
         </div>
         <!-- About (Links to Hero/Author info) -->
-        <div class="sidebar-item js-sidebar-nav" data-target="hero" title="关于 // ABOUT">
+        <div class="sidebar-item js-sidebar-nav" data-target="hero" title="关于 // ABOUT" aria-label="关于" role="button" tabindex="0">
             <div class="svg-icon icon-about"></div>
         </div>
         <!-- Contact -->
-        <div class="sidebar-item js-sidebar-nav" data-target="contact" title="通讯 // CONTACT">
+        <div class="sidebar-item js-sidebar-nav" data-target="contact" title="通讯 // CONTACT" aria-label="通讯" role="button" tabindex="0">
             <div class="svg-icon icon-contact"></div>
         </div>
 
         <div style="flex-grow: 1;"></div> <!-- Spacer -->
 
         <!-- Theme Toggle -->
-        <div class="sidebar-item js-theme-toggle" title="切换显示模式 // TOGGLE_MODE">
+        <div class="sidebar-item js-theme-toggle" title="切换显示模式 // TOGGLE_MODE" aria-label="切换显示模式" role="button" tabindex="0">
             <!-- Moon -->
-            <div class="svg-icon icon-moon" style="display:block"></div>
+            <div class="svg-icon icon-moon theme-icon"></div>
             <!-- Sun -->
-            <div class="svg-icon icon-sun" style="display:none"></div>
+            <div class="svg-icon icon-sun theme-icon"></div>
         </div>
-    </aside>
+    </nav>
 
     <header>
         <div class="logo">
@@ -61,41 +63,41 @@
         </div>
     </header>
 
-    <div class="container">
+    <main class="container" id="main">
         <!-- Hero Section -->
         <section class="hero reveal" id="hero">
             <div class="corner-deco tr"></div>
             <div class="corner-deco bl"></div>
             <div class="hero-content">
-                <div class="mono typing-cursor" style="color: var(--color-primary); margin-bottom: 20px; font-size: 0.9em; letter-spacing: 2px;">
-                    <span style="display:inline-block; width: 10px; height: 10px; background:var(--color-primary); margin-right: 10px;"></span>
+                <div class="mono typing-cursor hero-identity">
+                    <span class="hero-identity-dot"></span>
                     身份确认 // IDENTITY: VERIFIED
                 </div>
                 <h1 class="glitch-wrapper"><span class="glitch" data-text="zyglitch">zyglitch</span></h1>
-                <div style="font-size: 1.5rem; margin-bottom: 30px; font-weight: bold; color: var(--color-primary); font-family: var(--font-mono);">
+                <div class="hero-subtitle mono">
                     喜好：游戏，睡眠，编码。
                 </div>
                 <p class="hero-tagline">"咖喱加了米饭就成了主餐，不然的话只是普通的液体。米饭有着为了让咖喱变成主餐，必须和咖喱在一起的义务。"</p>
-                <div style="display: flex; gap: 20px;">
-                    <button class="btn btn-primary js-scroll-contact">了解我</button>
+                <div class="hero-actions">
+                    <button class="btn btn-primary js-scroll-contact" type="button">了解我</button>
                     <!-- Updated button with JS class instead of inline onclick -->
-                    <button class="btn js-scroll-projects">查看项目</button>
+                    <button class="btn js-scroll-projects" type="button">查看项目</button>
                 </div>
             </div>
             
             <!-- 3D geometric deco -->
-            <div style="position: absolute; right: 5%; top: 20%; width: 200px; height: 200px; pointer-events: none;">
-                <div style="position: absolute; width: 100%; height: 100%; border: 1px solid rgba(255,255,255,0.1); transform: rotate(45deg);"></div>
-                <div style="position: absolute; width: 100%; height: 100%; border: 1px solid rgba(255,255,255,0.1); transform: rotate(30deg);"></div>
-                <div style="position: absolute; width: 100%; height: 100%; border: 2px solid var(--color-primary); transform: rotate(0deg); opacity: 0.2;"></div>
+            <div class="hero-geo">
+                <div class="hero-geo-line hero-geo-45"></div>
+                <div class="hero-geo-line hero-geo-30"></div>
+                <div class="hero-geo-line hero-geo-0"></div>
             </div>
         </section>
 
         <!-- Global Search -->
-        <div class="search-area">
-             <input type="text" class="search-input" placeholder=">> 检索 zyglitch 的技术栈 (C/C++, Java)... [SEARCH_QUERY]">
-             <div style="position: absolute; right: 20px; top: 22px; color: var(--color-primary); font-family: var(--font-mono); font-size: 0.8rem;">⏎ ENTER</div>
-        </div>
+           <form class="search-area" role="search">
+               <input type="search" class="search-input" placeholder=">> 检索 zyglitch 的技术栈 (C/C++, Java)... [SEARCH_QUERY]" aria-label="站内检索">
+               <div class="search-hint">⏎ ENTER</div>
+           </form>
 
         <!-- Blog Posts / Projects -->
         <h2 class="logs-title mono reveal" id="projects">
@@ -116,8 +118,8 @@
                     <span class="tag">C++</span>
                     <span class="tag">EDITOR</span>
                 </div>
-                <div style="margin-top: 20px;">
-                     <a href="https://github.com/SeptThirteen/minpad" target="_blank" style="color: var(--color-primary); font-size: 0.8rem; text-decoration: none; border-bottom: 1px solid var(--color-primary); font-family: var(--font-mono);">>> 访问仓库</a>
+                 <div class="card-link">
+                     <a href="https://github.com/SeptThirteen/minpad" target="_blank" class="card-link-anchor">>> 访问仓库</a>
                 </div>
             </article>
             <!-- Article 2 -->
@@ -134,8 +136,8 @@
                     <span class="tag">NETWORK</span>
                     <span class="tag">FTP</span>
                 </div>
-                <div style="margin-top: 20px;">
-                     <a href="https://github.com/SeptThirteen/--socket--FTP-----" target="_blank" style="color: var(--color-primary); font-size: 0.8rem; text-decoration: none; border-bottom: 1px solid var(--color-primary); font-family: var(--font-mono);">>> 访问仓库</a>
+                 <div class="card-link">
+                     <a href="https://github.com/SeptThirteen/--socket--FTP-----" target="_blank" class="card-link-anchor">>> 访问仓库</a>
                 </div>
             </article>
 
@@ -146,7 +148,7 @@
         </div>
 
         <!-- Contact Section -->
-        <h2 class="logs-title mono reveal" id="contact" style="margin-top: 60px;">
+        <h2 class="logs-title mono reveal logs-title-contact" id="contact">
             <span style="color: var(--color-primary)">//</span> 通讯协议 & 链接
         </h2>
         
@@ -160,7 +162,7 @@
                 <div class="contact-value">
                     github.com/zyglitch
                 </div>
-                <a href="https://github.com/zyglitch" target="_blank" class="btn" style="text-decoration: none; font-size: 0.9rem;">
+                <a href="https://github.com/zyglitch" target="_blank" class="btn btn-link">
                     >> 建立连接
                 </a>
             </div>
@@ -170,12 +172,12 @@
                 <div class="contact-value">
                     changshu9.12.123@gmail.com
                 </div>
-                 <a href="mailto:changshu9.12.123@gmail.com" class="btn" style="text-decoration: none; font-size: 0.9rem;">
+                 <a href="mailto:changshu9.12.123@gmail.com" class="btn btn-link">
                     >> 发送指令
                 </a>
             </div>
         </div>
-    </div>
+    </main>
 
     <footer>
         <p class="mono">zyglitch &copy; 2026 // 保留所有权利</p>
