@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh repo *)",
+      "WebFetch(domain:github.com)",
+      "Bash(git clone *)",
+      "Read(//tmp/lookaway/**)",
+      "Bash(rm -rf /tmp/lookaway)",
+      "Read(//tmp/inkpaper/**)",
+      "Bash(rm -rf /tmp/inkpaper)"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
+    ]
+  }
+}
