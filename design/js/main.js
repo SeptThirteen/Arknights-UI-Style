@@ -1,6 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('System Online // Zyglitch Protocol Initiated');
 
+    // ── Dynamic system status ──
+    (function updateSystemStatus() {
+        const versionEl = document.getElementById('sys-version');
+        const onlineEl = document.getElementById('sys-online');
+        const loadEl = document.getElementById('sys-load');
+
+        // OS / Browser detection
+        if (versionEl) {
+            const ua = navigator.userAgent;
+            let os = '未知';
+            const ntMatch = ua.match(/Windows NT (\d+\.\d+)/);
+            if (ntMatch) {
+                const ntMap = { '10.0': 'Win10/11', '6.3': 'Win8.1', '6.2': 'Win8', '6.1': 'Win7' };
+                os = ntMap[ntMatch[1]] || 'Windows';
+            } else if (ua.indexOf('Mac OS X') !== -1) os = 'macOS';
+            else if (ua.indexOf('Linux') !== -1) os = 'Linux';
+            else if (ua.indexOf('Android') !== -1) os = 'Android';
+            else if (/iPhone|iPad/.test(ua)) os = 'iOS';
+
+            let browser = '未知';
+            if (ua.indexOf('Edg/') !== -1) browser = 'Edge';
+            else if (ua.indexOf('Chrome') !== -1) browser = 'Chrome';
+            else if (ua.indexOf('Firefox') !== -1) browser = 'Firefox';
+            else if (ua.indexOf('Safari') !== -1) browser = 'Safari';
+
+            versionEl.textContent = `系统版本 ${os} / ${browser}`;
+        }
+
+        // Online / offline
+        if (onlineEl) {
+            const setOnline = (online) => {
+                if (online) {
+                    onlineEl.textContent = '● 在线';
+                    onlineEl.style.color = 'var(--color-primary)';
+                } else {
+                    onlineEl.textContent = '● 离线';
+                    onlineEl.style.color = '#e74c3c';
+                }
+            };
+            setOnline(navigator.onLine);
+            window.addEventListener('online', () => setOnline(true));
+            window.addEventListener('offline', () => setOnline(false));
+        }
+
+        // Logical CPU cores
+        if (loadEl) {
+            const cores = navigator.hardwareConcurrency || '--';
+            loadEl.textContent = `CPU 核心 ${cores}`;
+        }
+    })();
+
     // Smooth scroll for "View Projects" button
     const viewProjectsBtn = document.querySelector('.js-scroll-projects');
     if (viewProjectsBtn) {
